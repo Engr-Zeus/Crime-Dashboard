@@ -1,6 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
 import os
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -93,8 +90,5 @@ app.layout = html.Div([
 # Run the app
 if __name__ == '__main__':
     app.run_server(debug=True)
-
-
-
 
 
