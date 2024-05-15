@@ -13,7 +13,7 @@ from dash import dcc, html
 
 
 # Directory where the CSV files are located
-directory = "C:/Personal/Esther/Project/Dataset"
+directory = "/Dataset"
 
 # List to store all dataframes
 dfs = []
