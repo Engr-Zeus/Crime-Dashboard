@@ -5,16 +5,12 @@ import seaborn as sns
 from mpl_toolkits.axes_grid1 import make_axes_locatable
 import plotly.graph_objects as go
 import plotly.express as px
-import warnings
 import dash
 from dash import dcc, html
 
-# Suppress FutureWarning for chained assignment
-warnings.simplefilter(action='ignore', category=FutureWarning)
-
 
 # Directory where the CSV files are located
-directory = "Dataset"
+directory = "/Dataset"
 
 # List to store all dataframes
 dfs = []
@@ -32,8 +28,20 @@ for filename in os.listdir(directory):
 # Combining all dataframes into a single dataframe
 combined_df = pd.concat(dfs, ignore_index=True)
 
+
+# Displaying the first few rows of the combined dataframe
+print(combined_df.head())
+
+
+# Displaying general information about the dataset
+print(combined_df.info())
+
+
 # Checking for missing values
 missing_values = combined_df.isnull().sum()
+print("Missing Values:")
+print(missing_values)
+
 
 # Drop columns with a large number of missing values
 combined_df.drop(columns=['Crime ID', 'Last outcome category', 'Context'], inplace=True)
@@ -48,7 +56,15 @@ combined_df['LSOA name'].fillna(combined_df['LSOA name'].mode()[0], inplace=True
 
 # Verify if missing values are handled
 missing_values_after = combined_df.isnull().sum()
+print("Missing Values After Handling:")
+print(missing_values_after)
 
+
+# Checking the summary statistics of numerical columns
+print(combined_df.describe())
+
+# Checking the summary statistics of categorical columns
+print(combined_df.describe(include=['object']))
 
 # Initialize the Dash app
 app = dash.Dash(__name__)
